@@ -19,6 +19,6 @@ RUN apt-get update \
  && curl https://bazel.build/bazel-release.pub.gpg | apt-key add - \
  && apt-get update -y \
  && apt-get -y install bazel \
- && sudo apt-get upgrade bazel
+ && apt-get upgrade bazel
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
