@@ -3,6 +3,7 @@ FROM nvidia/cuda
 MAINTAINER renpeng <renpeng@autohome.com.cn>
 
 RUN apt-get update \
+ && apt-get install -y curl \
  && apt-get -y install python-software-properties \
  && apt-get -y install software-properties-common \
  && add-apt-repository -y ppa:webupd8team/java \
@@ -15,7 +16,6 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /var/cache/oracle-jdk8-installer \
  && echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
- && apt-get install -y curl \
  && curl https://bazel.build/bazel-release.pub.gpg | apt-key add - \
  && apt-get update -y \
  && apt-get -y install bazel \
