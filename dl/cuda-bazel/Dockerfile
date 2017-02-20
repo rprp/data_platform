@@ -14,11 +14,13 @@ RUN apt-get update \
  && apt-get install -y oracle-java8-unlimited-jce-policy \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
- && rm -rf /var/cache/oracle-jdk8-installer \
- && echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
+ && rm -rf /var/cache/oracle-jdk8-installer 
+
+RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
  && curl https://bazel.build/bazel-release.pub.gpg | apt-key add - \
- && apt-get update -y \
- && apt-get -y install bazel \
- && apt-get upgrade bazel
+ && apt-get update -y 
+
+RUN apt-get -y install bazel \
+ && apt-get -y upgrade bazel
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
