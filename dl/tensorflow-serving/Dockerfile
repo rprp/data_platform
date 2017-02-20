@@ -17,6 +17,6 @@ RUN apt-get update && apt-get install -y \
         zip \
         zlib1g-dev \
     && apt-get clean all \
-    && git clone --recurse-submodules https://github.com/tensorflow/serving \
+    && git clone --recurse-submodules https://github.com/tensorflow/serving
 
 RUN cd serving/tensorflow
