@@ -3,7 +3,7 @@ FROM nvidia/cuda
 MAINTAINER renpeng <renpeng@autohome.com.cn>
 
 RUN apt-get update \
- && apt-get install -y curl \
+ && apt-get -y install curl \
  && apt-get -y install python-software-properties \
  && apt-get -y install software-properties-common \
  && add-apt-repository -y ppa:webupd8team/java \
