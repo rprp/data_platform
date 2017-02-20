@@ -40,11 +40,13 @@ RUN pip install enum34 futures mock six && \
 # we either update the base image beyond 14.04 or openjdk-8 is
 # finally backported to trusty; see e.g.
 #   https://bugs.launchpad.net/trusty-backports/+bug/1368094
-RUN add-apt-repository -y ppa:openjdk-r/ppa && \
-    apt-get update && \
-    apt-get install -y openjdk-8-jdk openjdk-8-jre-headless && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 \
+ && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
+ && apt-get -y install oracle-java8-installer \
+ && apt-get install -y oracle-java8-unlimited-jce-policy \
+ && apt-get clean all \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /var/cache/oracle-jdk8-installer
 
 # Running bazel inside a `docker build` command causes trouble, cf:
 #   https://github.com/bazelbuild/bazel/issues/134
