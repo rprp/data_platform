@@ -1,5 +1,5 @@
 # FROM nvidia image
-FROM nvidia/cuda
+FROM daocloud.io/rprp/nvidia-cuda:nvidia-cuda-8.0
 MAINTAINER renpeng <renpeng@autohome.com.cn>
 
 RUN apt-get update \
