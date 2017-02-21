@@ -19,6 +19,9 @@ RUN apt-get update && apt-get install -y \
         zip \
         zlib1g-dev \
         libcurl3-dev \
+        clang-3.6 \
+        cmake \
+        mlocate \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -70,5 +73,13 @@ RUN mkdir /bazel && \
     ./bazel-$BAZEL_VERSION-installer-linux-x86_64.sh && \
     cd / && \
     rm -f /bazel/bazel-$BAZEL_VERSION-installer-linux-x86_64.sh
+
+
+RUN CUDNN_DOWNLOAD_SUM=a87cb2df2e5e7cc0a05e266734e679ee1a2fadad6f06af82a76ed81a23b102c8 \
+ && curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v5.1/cudnn-8.0-linux-x64-v5.1.tgz -O \
+ && echo \"$CUDNN_DOWNLOAD_SUM  cudnn-8.0-linux-x64-v5.1.tgz\" \
+ && tar -xzf cudnn-8.0-linux-x64-v5.1.tgz -C /usr/local \
+ && rm cudnn-8.0-linux-x64-v5.1.tgz \
+ && ldconfig
 
 CMD ["/bin/bash"]
