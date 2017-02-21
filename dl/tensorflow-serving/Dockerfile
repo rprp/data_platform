@@ -9,7 +9,15 @@ RUN CUDNN_DOWNLOAD_SUM=a87cb2df2e5e7cc0a05e266734e679ee1a2fadad6f06af82a76ed81a2
  && rm cudnn-8.0-linux-x64-v5.1.tgz \
  && ldconfig
 
+RUN apt-get -y install clang-3.6 \
+        cmake \
+         mlocate \
+    && apt-get clean all
+
 RUN git clone --recurse-submodules https://github.com/tensorflow/serving \
     && rm -rf serving/.git
 
-RUN cd serving/tensorflow
+ADD conf.data /serving/tensorflow/conf.data
+
+RUN cd serving/tensorflow && ./configure < conf.data 
+RUN cd /serving && bazel build tensorflow_serving/...
