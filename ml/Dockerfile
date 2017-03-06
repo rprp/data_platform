@@ -101,7 +101,7 @@ ENV CAFFE_ROOT=/opt/caffe
 WORKDIR $CAFFE_ROOT
 
 # FIXME: use ARG instead of ENV once DockerHub supports this
-ENV CLONE_TAG=rc4
+ENV CLONE_TAG=v0.9999
 
 RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/BVLC/caffe.git . && \
     pip install --upgrade pip && \
